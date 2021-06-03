@@ -24,7 +24,7 @@ console.log(addToCollection('Jamming on these drums to release the frustration o
 
 
 console.log(`'collection' array now contains the following albums:`, collection);
-console.log(collection);
+
 
 
 const showCollection = collectionArray => {
@@ -36,3 +36,19 @@ const showCollection = collectionArray => {
 
 console.log(`TEST - run showCollection function.  Should log the 6 albums separately.`);
 showCollection(collection);
+
+
+const findByArtist = artistName => {
+  const matchingArtistList = [];
+  for (let album of collection){
+    if (album.artist === artistName){
+      matchingArtistList.push(album);
+    } // if any artists in collection match the entered artistName, push it to matchingArtistList
+  }
+  return matchingArtistList; // return the list (may be empty if no matches found)
+} // end findByArtist()
+
+console.log(`TEST - checking multiple artist names.  Should match 2x 'nofish' and 1x 'Blue Phil'. Empty array on 'Phenom'.`);
+console.log(findByArtist('nofish'));
+console.log(findByArtist('Blue Phil'));
+console.log(findByArtist('Phenom'));
