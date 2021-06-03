@@ -72,20 +72,34 @@ function search(requestedObject=""){
       }
     }
     return searchMatchYear; // return the array.  If any albums matched both artist and year, returns array w/ albums.
+  } else {
+    return [];
   }                         // Otherwise, if no albums matched both artist and year, return empty array.
 }
 
+//TEST -  create objects with properties that can be searched in the search function
 
-let newObject = {
+let matchingObject = {
   artist: 'nofish',
   yearPublished: '1962'
 }
 
-let newObject1 = {
+let nonMatchingObject = {
   artist: 'nofish',
   yearPublished: '1963',
 }
 
-console.log(search(newObject));
-console.log(search(newObject1));
+let rayCharlesObject = {
+  artist: 'Ray Charles',
+  yearPublished: '1957',
+}
+
+// TEST in search funtion
+console.log(`TEST - Search an object with matching properties, should return an array containing album properties`);
+console.log(search(matchingObject));
+console.log(`TEST - Search an object with one matching, one not matching property, should return an empty array`);
+console.log(search(nonMatchingObject));
+console.log(`TEST - Ray Charles search object from stretch goal. (no matching properties to be found)`);
+console.log(search(rayCharlesObject));
+console.log(`TEST - Leave the search function empty.  Should return the whole collection.`);
 console.log(search());
