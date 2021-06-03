@@ -52,3 +52,13 @@ console.log(`TEST - checking multiple artist names.  Should match 2x 'nofish' an
 console.log(findByArtist('nofish'));
 console.log(findByArtist('Blue Phil'));
 console.log(findByArtist('Phenom'));
+
+
+function search(requestedObject=none){
+  if (requestedObject === none){
+    return collection;
+  }// if no criteria is entered into the search, return entire collection.
+  
+
+  }
+}
