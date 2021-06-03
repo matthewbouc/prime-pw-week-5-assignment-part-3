@@ -54,11 +54,38 @@ console.log(findByArtist('Blue Phil'));
 console.log(findByArtist('Phenom'));
 
 
-function search(requestedObject=none){
-  if (requestedObject === none){
+function search(requestedObject=""){
+// return entire collection array if no critera is entered for the search
+  if (requestedObject === ""){
     return collection;
-  }// if no criteria is entered into the search, return entire collection.
-  
-
-  }
+  } // end 'no criteria searched'
+// if object is entered, use the findByArtist function to create
+// an array that matches the artist input.
+  const searchMatchArtist = findByArtist(requestedObject.artist);
+// if the artist array contains any matches, search through that array to determine
+// if the yearPublished property also matches search criteria.
+  if (searchMatchArtist.length > 0){
+    const searchMatchYear = []; // blank array that will be filled with matches
+    for (let album of searchMatchArtist){ // loop through the albums in the findByArtist() returned array.
+      if (album.yearPublished === requestedObject.yearPublished){
+        searchMatchYear.push(album); // if the yearPublished criteria also matches, push that album to searchMatchYear array
+      }
+    }
+    return searchMatchYear; // return the array.  If any albums matched both artist and year, returns array w/ albums.
+  }                         // Otherwise, if no albums matched both artist and year, return empty array.
 }
+
+
+let newObject = {
+  artist: 'nofish',
+  yearPublished: '1962'
+}
+
+let newObject1 = {
+  artist: 'nofish',
+  yearPublished: '1963',
+}
+
+console.log(search(newObject));
+console.log(search(newObject1));
+console.log(search());
