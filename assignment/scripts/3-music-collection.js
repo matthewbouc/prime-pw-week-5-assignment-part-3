@@ -141,11 +141,13 @@ function search(searchObject=""){
       tempArray = [];
     } // end if searchObject has yearPublished property
 
-    if (searchObject.track){
+    if (searchObject.trackName){
       for (let album of newArray){
-        if (album.track[0] === searchObject.track[0]){
-          tempArray.push(album);
-        } // end if track === track
+        for (let track of album.tracks){
+          if (track[0] === searchObject.trackName){
+            tempArray.push(album);
+          } // end if track === track
+        } // end loop through tracks
       }  // end loop thru newArray for track
       newArray = tempArray;
       tempArray = [];
@@ -175,6 +177,18 @@ let rayCharlesObject = {
   yearPublished: '1957',
 }
 
+let singleProperty = {
+  artist: 'Paper Lions',
+}
+
+let propertyYear = {
+  yearPublished: '2006',
+}
+
+let propertyTrack = {
+  trackName: 'My Wave',
+}
+
 // TEST in search funtion
 console.log(`TEST - Search an object with matching properties, should return an array containing album properties`);
 console.log(search(matchingObject));
@@ -184,3 +198,9 @@ console.log(`TEST - Ray Charles search object from stretch goal. (no matching pr
 console.log(search(rayCharlesObject));
 console.log(`TEST - Leave the search function empty.  Should return the whole collection.`);
 console.log(search());
+console.log(`TEST - Only entered an artist.  Should return both Albums`);
+console.log(search(singleProperty));
+console.log(`TEST - Only entered a year.  Should return albums from BB and RHCP.`);
+console.log(search(propertyYear));
+console.log(`TEST - Only entered a trackName (no duration) property.  Should return Soundgarden album`);
+console.log(search(propertyTrack));
