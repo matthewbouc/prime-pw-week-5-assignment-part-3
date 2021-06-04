@@ -92,6 +92,13 @@ function search(searchObject=""){
   if (searchObject === ""){
     return collection;
   } // *end 'no criteria searched'
+
+// I started something here trying to re-use above findByArtist function, but I was having problems
+// getting this to translate into all the other properties without rewriting the function for each.
+// I couldn't figure that out, so I eventually created the active code below, which is essence is a
+// re-write of the findByArtist function.  It look cleaner if that was turned into functions instead
+// of how I currently have it written.  Something to think about for the future.
+
 // *if object is entered, use the findByArtist function to create
 // *an array that matches the artist input.
   //const searchMatchArtist = findByArtist(requestedObject.artist);
