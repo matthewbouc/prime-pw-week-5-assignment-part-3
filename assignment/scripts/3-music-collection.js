@@ -61,7 +61,7 @@ const showCollection = collectionArray => {
   console.log(`The number of albums in this collection: ${collectionArray.length}.`);
   for (let album of collectionArray){
     console.log(`${album.title} by ${album.artist}, published in ${album.yearPublished}.`)
-    for (let i = 0; i < album.tracks.length; i ++){
+    for (let i = 0; i < album.tracks.length; i++){
       console.log(`${i+1}. ${album.tracks[i][0]}: ${album.tracks[i][1]}`);
     }
   } // returns TITLE by ARTIST, published in YEAR. - for each album in a collection.
@@ -212,5 +212,10 @@ console.log(`TEST - Only entered an artist.  Should return two Albums`);
 console.log(search(singleProperty));
 console.log(`TEST - Only entered a year.  Should return albums from BB and RHCP.`);
 console.log(search(propertyYear));
-console.log(`TEST - Only entered a trackName (no duration) property.  Should return Soundgarden album`);
+console.log(`TEST - Only entered a trackName ('My Wave') property.  Should return Soundgarden album`);
 console.log(search(propertyTrack));
+
+// Should be able to showCollection on search arrays, too.
+console.log(`TEST - Run the showCollection function on the search function (using trackName search above)
+  Should log the album in the same manner as showCollection tests above.`);
+showCollection(search(propertyTrack));
