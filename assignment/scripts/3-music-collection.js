@@ -2,9 +2,13 @@ console.log('***** Music Collection *****')
 
 const collection = [];
 
+let dearAgonyTracks = [['Fade Away', '3:16'], ['I Will Not Bow', '3:36'], ['Crawl', '3:58']]
+
+
+
 // creates a new object (album) with input parameters as properties.  Push
 // object to collection array and returns the album object.
-const addToCollection = (title, artist, yearPublished) => {
+const addToCollection = (title, artist, yearPublished, arrayOfTracks) => {
   let album = {
   title: title,
   artist: artist,
@@ -15,12 +19,12 @@ const addToCollection = (title, artist, yearPublished) => {
 } // end addToCollection()
 
 console.log(`Adding albums to 'collection' using addToCollection().`);
-console.log(addToCollection('fish','nofish','1962'));
-console.log(addToCollection("plenty o'", 'nofish', '1961'));
-console.log(addToCollection('The Moon', 'Blue Phil', '1976'));
-console.log(addToCollection("Tailgatin'", 'Tayley Rich', '2017'));
-console.log(addToCollection('Boats on Water', 'Tayley Rich', '2015'));
-console.log(addToCollection('Jamming on these drums to release the frustration of a hard day at work as a lawyer', 'Kelly', '1993'));
+console.log(addToCollection('Dear Agony','Breaking Benjamin','2009'));
+console.log(addToCollection('Phobia', 'Breaking Benjamin', '2006'));
+console.log(addToCollection('Trophies', 'Paper Lions', '2010'));
+console.log(addToCollection('At Long Creek', 'Paper Lions', '2012'));
+console.log(addToCollection('Stadium Arcadium', 'Red Hot Chili Peppers', '2006'));
+console.log(addToCollection('Superunknown', 'Soundgarden', '1994'));
 
 
 console.log(`'collection' array now contains the following albums:`, collection);
@@ -48,10 +52,10 @@ const findByArtist = artistName => {
   return matchingArtistList; // return the list (may be empty if no matches found)
 } // end findByArtist()
 
-console.log(`TEST - checking multiple artist names.  Should match 2x 'nofish' and 1x 'Blue Phil'. Empty array on 'Phenom'.`);
-console.log(findByArtist('nofish'));
-console.log(findByArtist('Blue Phil'));
-console.log(findByArtist('Phenom'));
+console.log(`TEST - checking multiple artist names.  Should match 2x 'Breaking Benjamin' and 1x 'Soundgarden'. Empty array on 'Taylor Swift'.`);
+console.log(findByArtist('Breaking Benjamin'));
+console.log(findByArtist('Soundgarden'));
+console.log(findByArtist('Taylor Swift'));
 
 
 function search(requestedObject=""){
@@ -80,13 +84,13 @@ function search(requestedObject=""){
 //TEST -  create objects with properties that can be searched in the search function
 
 let matchingObject = {
-  artist: 'nofish',
-  yearPublished: '1962'
+  artist: 'Breaking Benjamin',
+  yearPublished: '2009'
 }
 
 let nonMatchingObject = {
-  artist: 'nofish',
-  yearPublished: '1963',
+  artist: 'Breaking Benjamin',
+  yearPublished: '2021',
 }
 
 let rayCharlesObject = {
