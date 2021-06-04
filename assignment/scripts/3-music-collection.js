@@ -2,6 +2,7 @@ console.log('***** Music Collection *****')
 
 const collection = [];
 
+//**** Listing out some tracks in an array *****
 let dearAgonyTracks = [['Fade Away', '3:16'], ['I Will Not Bow', '3:36'], ['Crawl', '3:58']]
 let phobiaTracks = [['The Diary of Jane', '3:20'], ['Breath', '3:38'], ['You', '3:21']];
 let trophiesTracks = [['Hands', '2:27'], ['Lost the War', '2:48'], ['Sweat It Out', '2:32']]
@@ -9,6 +10,7 @@ let atLongCreekTracks = []
 let stadiumArcadiumTracks = []
 let superUnknownTracks = []
 
+// function to make it quicker.. or did it make it take more time??
 function addTracks(arrayName, trackName, length){
   arrayName.push([trackName, length]);
 }
@@ -27,6 +29,7 @@ addTracks(superUnknownTracks, 'Let Me Drown', '3:53');
 addTracks(superUnknownTracks, 'My Wave', '5:14');
 addTracks(superUnknownTracks, 'Fell On Black Days', '4:42');
 console.log(superUnknownTracks);
+// End Track arrays
 
 // creates a new object (album) with input parameters as properties.  Push
 // object to collection array and returns the album object.
@@ -34,19 +37,20 @@ const addToCollection = (title, artist, yearPublished, arrayOfTracks) => {
   let album = {
   title: title,
   artist: artist,
-  yearPublished: yearPublished
+  yearPublished: yearPublished,
+  tracks: arrayOfTracks,
   }
   collection.push(album);
   return album;
 } // end addToCollection()
 
 console.log(`Adding albums to 'collection' using addToCollection().`);
-console.log(addToCollection('Dear Agony','Breaking Benjamin','2009'));
-console.log(addToCollection('Phobia', 'Breaking Benjamin', '2006'));
-console.log(addToCollection('Trophies', 'Paper Lions', '2010'));
-console.log(addToCollection('At Long Creek', 'Paper Lions', '2012'));
-console.log(addToCollection('Stadium Arcadium', 'Red Hot Chili Peppers', '2006'));
-console.log(addToCollection('Superunknown', 'Soundgarden', '1994'));
+console.log(addToCollection('Dear Agony','Breaking Benjamin','2009', dearAgonyTracks));
+console.log(addToCollection('Phobia', 'Breaking Benjamin', '2006', phobiaTracks));
+console.log(addToCollection('Trophies', 'Paper Lions', '2010', trophiesTracks));
+console.log(addToCollection('At Long Creek', 'Paper Lions', '2012', atLongCreekTracks));
+console.log(addToCollection('Stadium Arcadium', 'Red Hot Chili Peppers', '2006', stadiumArcadiumTracks));
+console.log(addToCollection('Superunknown', 'Soundgarden', '1994', superUnknownTracks));
 
 
 console.log(`'collection' array now contains the following albums:`, collection);
