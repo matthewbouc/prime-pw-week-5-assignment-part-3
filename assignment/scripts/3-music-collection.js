@@ -3,8 +3,30 @@ console.log('***** Music Collection *****')
 const collection = [];
 
 let dearAgonyTracks = [['Fade Away', '3:16'], ['I Will Not Bow', '3:36'], ['Crawl', '3:58']]
+let phobiaTracks = [['The Diary of Jane', '3:20'], ['Breath', '3:38'], ['You', '3:21']];
+let trophiesTracks = [['Hands', '2:27'], ['Lost the War', '2:48'], ['Sweat It Out', '2:32']]
+let atLongCreekTracks = []
+let stadiumArcadiumTracks = []
+let superUnknownTracks = []
 
+function addTracks(arrayName, trackName, length){
+  arrayName.push([trackName, length]);
+}
 
+addTracks(atLongCreekTracks, 'Ghostwriters', '4:08');
+addTracks(atLongCreekTracks, 'My friend', '3:22');
+addTracks(atLongCreekTracks, 'Little Liar', '4:00');
+console.log(atLongCreekTracks);
+
+addTracks(stadiumArcadiumTracks, 'Dani California', '4:42');
+addTracks(stadiumArcadiumTracks, 'Snow (Hey Oh)', '5:35');
+addTracks(stadiumArcadiumTracks, 'Charlie', '4:37');
+console.log(stadiumArcadiumTracks);
+
+addTracks(superUnknownTracks, 'Let Me Drown', '3:53');
+addTracks(superUnknownTracks, 'My Wave', '5:14');
+addTracks(superUnknownTracks, 'Fell On Black Days', '4:42');
+console.log(superUnknownTracks);
 
 // creates a new object (album) with input parameters as properties.  Push
 // object to collection array and returns the album object.
