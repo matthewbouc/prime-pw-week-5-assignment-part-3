@@ -205,19 +205,31 @@ let propertyTrack = {
   trackName: 'My Wave',
 }
 
+let emptyObject = {
+}
+
 // TEST in search funtion
 console.log(`TEST - Search an object with multiple matching properties, should return an array of albums`);
 console.log(search(matchingObject));
+
 console.log(`TEST - Search an object with one matching & one not matching property, should return an empty array`);
 console.log(search(nonMatchingObject));
+
 console.log(`TEST - Ray Charles search object from stretch goal. (no matching properties to be found)`);
 console.log(search(rayCharlesObject));
+
+console.log(`TEST - Testing an object without any properties.`);
+console.log(search(emptyObject));
+
 console.log(`TEST - Leave the search function empty.  Should return the whole collection.`);
 console.log(search());
+
 console.log(`TEST - Only entered an artist.  Should return two Albums`);
 console.log(search(singleProperty));
+
 console.log(`TEST - Only entered a year.  Should return albums from BB and RHCP.`);
 console.log(search(propertyYear));
+
 console.log(`TEST - Only entered a trackName ('My Wave') property.  Should return Soundgarden album`);
 console.log(search(propertyTrack));
 
