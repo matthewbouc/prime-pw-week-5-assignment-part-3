@@ -16,7 +16,7 @@ function addTracks(arrayName, trackName, duration){
 }
 
 addTracks(atLongCreekTracks, 'Ghostwriters', '4:08');
-addTracks(atLongCreekTracks, 'My friend', '3:22');
+addTracks(atLongCreekTracks, 'My Friend', '3:22');
 addTracks(atLongCreekTracks, 'Little Liar', '4:00');
 console.log(atLongCreekTracks);
 
@@ -60,7 +60,10 @@ console.log(`'collection' array now contains the following albums:`, collection)
 const showCollection = collectionArray => {
   console.log(`The number of albums in this collection: ${collectionArray.length}.`);
   for (let album of collectionArray){
-    console.log(`${album.title} by ${album.artist}, published in ${album.yearPublished}.`);
+    console.log(`${album.title} by ${album.artist}, published in ${album.yearPublished}.`)
+    for (let i = 0; i < album.tracks.length; i ++){
+      console.log(`${i+1}. ${album.tracks[i][0]}: ${album.tracks[i][1]}`);
+    }
   } // returns TITLE by ARTIST, published in YEAR. - for each album in a collection.
 } // end showCollection()
 
