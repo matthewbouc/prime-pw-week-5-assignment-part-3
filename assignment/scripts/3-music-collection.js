@@ -11,8 +11,8 @@ let stadiumArcadiumTracks = []
 let superUnknownTracks = []
 
 // function to make it quicker.. or did it make it take more time??
-function addTracks(arrayName, trackName, length){
-  arrayName.push([trackName, length]);
+function addTracks(arrayName, trackName, duration){
+  arrayName.push([trackName, duration]);
 }
 
 addTracks(atLongCreekTracks, 'Ghostwriters', '4:08');
@@ -84,28 +84,79 @@ console.log(findByArtist('Soundgarden'));
 console.log(findByArtist('Taylor Swift'));
 
 
-function search(requestedObject=""){
+
+function search(searchObject=""){
+  let newArray = collection;
+  let tempArray = []
 // return entire collection array if no critera is entered for the search
-  if (requestedObject === ""){
+  if (searchObject === ""){
     return collection;
-  } // end 'no criteria searched'
-// if object is entered, use the findByArtist function to create
-// an array that matches the artist input.
-  const searchMatchArtist = findByArtist(requestedObject.artist);
-// if the artist array contains any matches, search through that array to determine
-// if the yearPublished property also matches search criteria.
-  if (searchMatchArtist.length > 0){
-    const searchMatchYear = []; // blank array that will be filled with matches
-    for (let album of searchMatchArtist){ // loop through the albums in the findByArtist() returned array.
-      if (album.yearPublished === requestedObject.yearPublished){
-        searchMatchYear.push(album); // if the yearPublished criteria also matches, push that album to searchMatchYear array
-      }
-    }
-    return searchMatchYear; // return the array.  If any albums matched both artist and year, returns array w/ albums.
-  } else {
-    return [];
-  }                         // Otherwise, if no albums matched both artist and year, return empty array.
-}
+  } // *end 'no criteria searched'
+// *if object is entered, use the findByArtist function to create
+// *an array that matches the artist input.
+  //const searchMatchArtist = findByArtist(requestedObject.artist);
+// *if the artist array contains any matches, search through that array to determine
+// *if the yearPublished property also matches search criteria.
+  //if (searchMatchArtist.length > 0){
+    //const searchMatchYear = []; // blank array that will be filled with matches
+    //for (let album of searchMatchArtist){ // loop through the albums in the findByArtist() returned array.
+      //if (album.yearPublished === requestedObject.yearPublished){
+        //searchMatchYear.push(album); // if the yearPublished criteria also matches, push that album to searchMatchYear array
+      //}
+    //}
+    //return searchMatchYear; // return the array.  If any albums matched both artist and year, returns array w/ albums.
+  //} else {
+    //return [];
+  //}                         // Otherwise, if no albums matched both artist and year, return empty array.
+//}
+  while (newArray.length > 0){
+
+    if (searchObject.artist){
+      for (let album of newArray){
+        if (album.artist === searchObject.artist){
+          tempArray.push(album);
+        } // end if artist === artist
+      }  // end loop thru newArray for artist
+      newArray = tempArray;
+      tempArray = [];
+    } // end if searchObject has artist property
+
+    if (searchObject.title){
+      for (let album of newArray){
+        if (album.title === searchObject.title){
+          tempArray.push(album);
+        } // end if title === title
+      }  // end loop thru newArray for title
+      newArray = tempArray;
+      tempArray = [];
+    } // end if searchObject has title property
+
+    if (searchObject.yearPublished){
+      for (let album of newArray){
+        if (album.yearPublished === searchObject.yearPublished){
+          tempArray.push(album);
+        } // end if yearPublished === yearPublished
+      }  // end loop thru newArray for yearPublished
+      newArray = tempArray;
+      tempArray = [];
+    } // end if searchObject has yearPublished property
+
+    if (searchObject.track){
+      for (let album of newArray){
+        if (album.track[0] === searchObject.track[0]){
+          tempArray.push(album);
+        } // end if track === track
+      }  // end loop thru newArray for track
+      newArray = tempArray;
+      tempArray = [];
+    } // end if searchObject has track property
+    return newArray
+  } // End while loop for search
+  return newArray // should be blank if nothing matches.
+}  // End search()
+
+
+
 
 //TEST -  create objects with properties that can be searched in the search function
 
