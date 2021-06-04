@@ -3,33 +3,31 @@ console.log('***** Music Collection *****')
 const collection = [];
 
 //**** Listing out some tracks in an array *****
+// *********************************************
 let dearAgonyTracks = [['Fade Away', '3:16'], ['I Will Not Bow', '3:36'], ['Crawl', '3:58']]
 let phobiaTracks = [['The Diary of Jane', '3:20'], ['Breath', '3:38'], ['You', '3:21']];
 let trophiesTracks = [['Hands', '2:27'], ['Lost the War', '2:48'], ['Sweat It Out', '2:32']]
 let atLongCreekTracks = []
 let stadiumArcadiumTracks = []
 let superUnknownTracks = []
-
 // function to make it quicker.. or did it make it take more time??
 function addTracks(arrayName, trackName, duration){
   arrayName.push([trackName, duration]);
 }
-
 addTracks(atLongCreekTracks, 'Ghostwriters', '4:08');
 addTracks(atLongCreekTracks, 'My Friend', '3:22');
 addTracks(atLongCreekTracks, 'Little Liar', '4:00');
 console.log(atLongCreekTracks);
-
 addTracks(stadiumArcadiumTracks, 'Dani California', '4:42');
 addTracks(stadiumArcadiumTracks, 'Snow (Hey Oh)', '5:35');
 addTracks(stadiumArcadiumTracks, 'Charlie', '4:37');
 console.log(stadiumArcadiumTracks);
-
 addTracks(superUnknownTracks, 'Let Me Drown', '3:53');
 addTracks(superUnknownTracks, 'My Wave', '5:14');
 addTracks(superUnknownTracks, 'Fell On Black Days', '4:42');
 console.log(superUnknownTracks);
-// End Track arrays
+// *********************************
+// ******  End Track arrays ********
 
 // creates a new object (album) with input parameters as properties.  Push
 // object to collection array and returns the album object.
@@ -44,6 +42,7 @@ const addToCollection = (title, artist, yearPublished, arrayOfTracks) => {
   return album;
 } // end addToCollection()
 
+// Add albums to the collection array
 console.log(`Adding albums to 'collection' using addToCollection().`);
 console.log(addToCollection('Dear Agony','Breaking Benjamin','2009', dearAgonyTracks));
 console.log(addToCollection('Phobia', 'Breaking Benjamin', '2006', phobiaTracks));
@@ -52,7 +51,7 @@ console.log(addToCollection('At Long Creek', 'Paper Lions', '2012', atLongCreekT
 console.log(addToCollection('Stadium Arcadium', 'Red Hot Chili Peppers', '2006', stadiumArcadiumTracks));
 console.log(addToCollection('Superunknown', 'Soundgarden', '1994', superUnknownTracks));
 
-
+// Verify that collection now contains the expected albums.
 console.log(`'collection' array now contains the following albums:`, collection);
 
 
@@ -63,14 +62,14 @@ const showCollection = collectionArray => {
     console.log(`${album.title} by ${album.artist}, published in ${album.yearPublished}.`)
     for (let i = 0; i < album.tracks.length; i++){
       console.log(`${i+1}. ${album.tracks[i][0]}: ${album.tracks[i][1]}`);
-    }
+    } // Loop through the tracks property of each album and log it out.
   } // returns TITLE by ARTIST, published in YEAR. - for each album in a collection.
 } // end showCollection()
 
 console.log(`TEST - run showCollection function.  Should log the 6 albums separately.`);
 showCollection(collection);
 
-
+// Loop through albums to find match specific artist
 const findByArtist = artistName => {
   const matchingArtistList = [];
   for (let album of collection){
@@ -87,19 +86,21 @@ console.log(findByArtist('Soundgarden'));
 console.log(findByArtist('Taylor Swift'));
 
 
-
+// create search function - define a default state of empty.  If empty, then return collection.
 function search(searchObject=""){
+  // defining arrays that will be used to store search results below.
   let newArray = collection;
   let tempArray = []
-// return entire collection array if no critera is entered for the search
+
+// Here is where we return entire collection array if no critera is entered for the search
   if (searchObject === ""){
     return collection;
   } // *end 'no criteria searched'
 
 // I started something here trying to re-use above findByArtist function, but I was having problems
 // getting this to translate into all the other properties without rewriting the function for each.
-// I couldn't figure that out, so I eventually created the active code below, which is essence is a
-// re-write of the findByArtist function.  It look cleaner if that was turned into functions instead
+// I couldn't figure that out, so I eventually created the active code below, which ended up just being a
+// re-write of the findByArtist function.  It might look cleaner if the code was turned into functions instead
 // of how I currently have it written.  Something to think about for the future.
 
 // *if object is entered, use the findByArtist function to create
@@ -119,6 +120,11 @@ function search(searchObject=""){
     //return [];
   //}                         // Otherwise, if no albums matched both artist and year, return empty array.
 //}
+
+
+// we want to keep the below code running 'while' there are still items in newArray
+// if newArray.length = 0, that means one of the search criteria wasn't met, therefore we can quit
+// the search and return an empty array.
   while (newArray.length > 0){
 
     if (searchObject.artist){
@@ -157,8 +163,8 @@ function search(searchObject=""){
           if (track[0] === searchObject.trackName){
             tempArray.push(album);
           } // end if track === track
-        } // end loop through tracks
-      }  // end loop thru newArray for track
+        } // need an extra loop here to search each track. end loop through tracks
+      }  // end loop thru albums in new array
       newArray = tempArray;
       tempArray = [];
     } // end if searchObject has track property
