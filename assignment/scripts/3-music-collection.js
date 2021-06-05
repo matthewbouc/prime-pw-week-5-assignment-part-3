@@ -78,7 +78,7 @@ function search(searchObject=""){
   while (results.length > 0){
     // we want to keep the below code running 'while' there are still items in results
     // if results.length = 0, that means one of the search criteria had zero matches, return an empty array.
-    if (searchObject.artist){
+    if (searchObject.artist){  // if artist property is defined, loop thru it. Else continue to next property
       for (let album of results){
         if (album.artist === searchObject.artist){
           tempResults.push(album);
@@ -88,7 +88,7 @@ function search(searchObject=""){
       tempResults = [];
     } // end if searchObject has artist property
 
-    if (searchObject.title){
+    if (searchObject.title){ // if title property is defined, loop thru it, else continue to next property
       for (let album of results){
         if (album.title === searchObject.title){
           tempResults.push(album);
@@ -155,21 +155,21 @@ const emptyObject = {
 
 // TEST in search funtion
 console.log(`*****TESTING AREA BELOW*****`);
-console.log(`Search Object Properties(artist: BB, year: 2009), return Dear Agony album`, search(matchingObject));
+console.log(`Search Object Properties (artist: BB, year: 2009), return Dear Agony album`, search(matchingObject));
 
-console.log(`Search Object Properties(artist: BB, year: 2012), return no matches`, search(nonMatchingObject));
+console.log(`Search Object Properties (artist: BB, year: 2012), return no matches`, search(nonMatchingObject));
 
-console.log(`Search Object Properties(artist: Ray Charles, year: 1957), return no matches`, search(rayCharlesObject));
+console.log(`Search Object Properties (artist: Ray Charles, year: 1957), return no matches`, search(rayCharlesObject));
 
-console.log(`Search Object Properties(no properties), return collection`, search(emptyObject));
+console.log(`Search Object Properties (no properties), return collection`, search(emptyObject));
 
 console.log(`Search No Object entered, return collection`, search());
 
-console.log(`Search Object Properties(artist: Paper Lions), return 2 Paper Lions albums`, search(singleProperty));
+console.log(`Search Object Properties (artist: Paper Lions), return 2 Paper Lions albums`, search(singleProperty));
 
-console.log(`Search Object Properties(year: 2006), return 2 albums from 2006`, search(propertyYear));
+console.log(`Search Object Properties (year: 2006), return 2 albums from 2006`, search(propertyYear));
 
-console.log(`Search Object Properties(trackName: My Wave), return Soundgarden album`, search(propertyTrack));
+console.log(`Search Object Properties (trackName: My Wave), return Soundgarden album`, search(propertyTrack));
 
 // Should be able to showCollection on search arrays, too.
 console.log(`Input search() into showCollection to log Soundgarden album`);
