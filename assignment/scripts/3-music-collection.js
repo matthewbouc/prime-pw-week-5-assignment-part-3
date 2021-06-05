@@ -1,37 +1,13 @@
+// ***********
+// Tracks for each album have been given their own file to declutter this page
+// **********
 console.log('***** Music Collection *****')
 
 const collection = [];
 
-//**** Listing out some tracks in an array *****
-// *********************************************
-let dearAgonyTracks = [['Fade Away', '3:16'], ['I Will Not Bow', '3:36'], ['Crawl', '3:58']]
-let phobiaTracks = [['The Diary of Jane', '3:20'], ['Breath', '3:38'], ['You', '3:21']];
-let trophiesTracks = [['Hands', '2:27'], ['Lost the War', '2:48'], ['Sweat It Out', '2:32']]
-let atLongCreekTracks = []
-let stadiumArcadiumTracks = []
-let superUnknownTracks = []
-// function to make it quicker.. or did it make it take more time??
-function addTracks(arrayName, trackName, duration){
-  arrayName.push([trackName, duration]);
-}
-addTracks(atLongCreekTracks, 'Ghostwriters', '4:08');
-addTracks(atLongCreekTracks, 'My Friend', '3:22');
-addTracks(atLongCreekTracks, 'Little Liar', '4:00');
-console.log(atLongCreekTracks);
-addTracks(stadiumArcadiumTracks, 'Dani California', '4:42');
-addTracks(stadiumArcadiumTracks, 'Snow (Hey Oh)', '5:35');
-addTracks(stadiumArcadiumTracks, 'Charlie', '4:37');
-console.log(stadiumArcadiumTracks);
-addTracks(superUnknownTracks, 'Let Me Drown', '3:53');
-addTracks(superUnknownTracks, 'My Wave', '5:14');
-addTracks(superUnknownTracks, 'Fell On Black Days', '4:42');
-console.log(superUnknownTracks);
-// *********************************
-// ******  End Track arrays ********
-
 // creates a new object (album) with input parameters as properties.  Push
 // object to collection array and returns the album object.
-const addToCollection = (title, artist, yearPublished, arrayOfTracks) => {
+function addToCollection(title, artist, yearPublished, arrayOfTracks){
   let album = {
   title: title,
   artist: artist,
@@ -56,7 +32,7 @@ console.log(`'collection' array now contains the following albums:`, collection)
 
 
 
-const showCollection = collectionArray => {
+function showCollection(collectionArray){
   console.log(`The number of albums in this collection: ${collectionArray.length}.`);
   for (let album of collectionArray){
     console.log(`${album.title} by ${album.artist}, published in ${album.yearPublished}.`)
@@ -70,7 +46,7 @@ console.log(`TEST - run showCollection function.  Should log the 6 albums separa
 showCollection(collection);
 
 // Loop through albums to find match specific artist
-const findByArtist = artistName => {
+function findByArtist(artistName){
   const matchingArtistList = [];
   for (let album of collection){
     if (album.artist === artistName){
@@ -174,42 +150,43 @@ function search(searchObject=""){
 }  // End search()
 
 
-
+                     //// TESTING AREA BELOW ////
 
 //TEST -  create objects with properties that can be searched in the search function
 
-let matchingObject = {
+const matchingObject = {
   artist: 'Breaking Benjamin',
   yearPublished: '2009'
 }
 
-let nonMatchingObject = {
+const nonMatchingObject = {
   artist: 'Breaking Benjamin',
   yearPublished: '2021',
 }
 
-let rayCharlesObject = {
+const rayCharlesObject = {
   artist: 'Ray Charles',
   yearPublished: '1957',
 }
 
-let singleProperty = {
+const singleProperty = {
   artist: 'Paper Lions',
 }
 
-let propertyYear = {
+const propertyYear = {
   yearPublished: '2006',
 }
 
-let propertyTrack = {
+const propertyTrack = {
   trackName: 'My Wave',
 }
 
-let emptyObject = {
+const emptyObject = {
 }
 
 // TEST in search funtion
-console.log(`TEST - Search an object with multiple matching properties, should return an array of albums`);
+console.log(`*****TESTING AREA BELOW*****`);
+console.log(`TEST - Search an object with multiple matching properties, returns Breaking Benjamin album`);
 console.log(search(matchingObject));
 
 console.log(`TEST - Search an object with one matching & one not matching property, should return an empty array`);
