@@ -31,7 +31,6 @@ console.log(addToCollection('Superunknown', 'Soundgarden', '1994', superUnknownT
 console.log(`'collection' array now contains the following albums:`, collection);
 
 
-
 function showCollection(collectionArray){
   console.log(`The number of albums in this collection: ${collectionArray.length}.`);
   for (let album of collectionArray){
@@ -64,89 +63,65 @@ console.log(findByArtist('Taylor Swift'));
 
 // create search function - define a default state of empty.  If empty, then return collection.
 function search(searchObject=""){
-  // defining arrays that will be used to store search results below.
-  let newArray = collection;
-  let tempArray = []
-
-// Here is where we return entire collection array if no critera is entered for the search
+  // Arrays that will be used to store search results below.
+  let results = collection;
+  let tempResults = []
+// If nothing is entered into the search or the object is empty, return collection
   if (searchObject === ""){
     return collection;
   } // *end 'no criteria searched'
 
-// I started something here trying to re-use above findByArtist function, but I was having problems
-// getting this to translate into all the other properties without rewriting the function for each.
-// I couldn't figure that out, so I eventually created the active code below, which ended up just being a
-// re-write of the findByArtist function.  It might look cleaner if the code was turned into functions instead
-// of how I currently have it written.  Something to think about for the future.
-
-// *if object is entered, use the findByArtist function to create
-// *an array that matches the artist input.
-  //const searchMatchArtist = findByArtist(requestedObject.artist);
-// *if the artist array contains any matches, search through that array to determine
-// *if the yearPublished property also matches search criteria.
-  //if (searchMatchArtist.length > 0){
-    //const searchMatchYear = []; // blank array that will be filled with matches
-    //for (let album of searchMatchArtist){ // loop through the albums in the findByArtist() returned array.
-      //if (album.yearPublished === requestedObject.yearPublished){
-        //searchMatchYear.push(album); // if the yearPublished criteria also matches, push that album to searchMatchYear array
-      //}
-    //}
-    //return searchMatchYear; // return the array.  If any albums matched both artist and year, returns array w/ albums.
-  //} else {
-    //return [];
-  //}                         // Otherwise, if no albums matched both artist and year, return empty array.
-//}
-
-
-// we want to keep the below code running 'while' there are still items in newArray
-// if newArray.length = 0, that means one of the search criteria wasn't met, therefore we can quit
-// the search and return an empty array.
-  while (newArray.length > 0){
-
+  // To begin, results = collection.  As we check each object property, matching results will be .push()
+  // into tempResults.  After looping through a property, results is set to the matches which were
+  // pushed into tempResults, then tempResults is reverted back to a blank array for the next property search.
+  // The next property will then only loop through the matching results of the property before it.
+  while (results.length > 0){
+    // we want to keep the below code running 'while' there are still items in results
+    // if results.length = 0, that means one of the search criteria had zero matches, return an empty array.
     if (searchObject.artist){
-      for (let album of newArray){
+      for (let album of results){
         if (album.artist === searchObject.artist){
-          tempArray.push(album);
+          tempResults.push(album);
         } // end if artist === artist
-      }  // end loop thru newArray for artist
-      newArray = tempArray;
-      tempArray = [];
+      }  // end loop thru results for artist
+      results = tempResults;
+      tempResults = [];
     } // end if searchObject has artist property
 
     if (searchObject.title){
-      for (let album of newArray){
+      for (let album of results){
         if (album.title === searchObject.title){
-          tempArray.push(album);
+          tempResults.push(album);
         } // end if title === title
-      }  // end loop thru newArray for title
-      newArray = tempArray;
-      tempArray = [];
+      }  // end loop thru results for title
+      results = tempResults;
+      tempResults = [];
     } // end if searchObject has title property
 
     if (searchObject.yearPublished){
-      for (let album of newArray){
+      for (let album of results){
         if (album.yearPublished === searchObject.yearPublished){
-          tempArray.push(album);
+          tempResults.push(album);
         } // end if yearPublished === yearPublished
-      }  // end loop thru newArray for yearPublished
-      newArray = tempArray;
-      tempArray = [];
+      }  // end loop thru results for yearPublished
+      results = tempResults;
+      tempResults = [];
     } // end if searchObject has yearPublished property
 
     if (searchObject.trackName){
-      for (let album of newArray){
+      for (let album of results){
         for (let track of album.tracks){
           if (track[0] === searchObject.trackName){
-            tempArray.push(album);
+            tempResults.push(album);
           } // end if track === track
         } // need an extra loop here to search each track. end loop through tracks
       }  // end loop thru albums in new array
-      newArray = tempArray;
-      tempArray = [];
+      results = tempResults;
+      tempResults = [];
     } // end if searchObject has track property
-    return newArray
-  } // End while loop for search
-  return newArray // should be blank if nothing matches.
+    return results // return results array with matching albums
+  }
+  return results // if a property and zero matches, return the empty array.
 }  // End search()
 
 
@@ -158,59 +133,44 @@ const matchingObject = {
   artist: 'Breaking Benjamin',
   yearPublished: '2009'
 }
-
 const nonMatchingObject = {
   artist: 'Breaking Benjamin',
   yearPublished: '2021',
 }
-
 const rayCharlesObject = {
   artist: 'Ray Charles',
   yearPublished: '1957',
 }
-
 const singleProperty = {
   artist: 'Paper Lions',
 }
-
 const propertyYear = {
   yearPublished: '2006',
 }
-
 const propertyTrack = {
   trackName: 'My Wave',
 }
-
 const emptyObject = {
 }
 
 // TEST in search funtion
 console.log(`*****TESTING AREA BELOW*****`);
-console.log(`TEST - Search an object with multiple matching properties, returns Breaking Benjamin album`);
-console.log(search(matchingObject));
+console.log(`Search Object Properties(artist: BB, year: 2009), return Dear Agony album`, search(matchingObject));
 
-console.log(`TEST - Search an object with one matching & one not matching property, should return an empty array`);
-console.log(search(nonMatchingObject));
+console.log(`Search Object Properties(artist: BB, year: 2012), return no matches`, search(nonMatchingObject));
 
-console.log(`TEST - Ray Charles search object from stretch goal. (no matching properties to be found)`);
-console.log(search(rayCharlesObject));
+console.log(`Search Object Properties(artist: Ray Charles, year: 1957), return no matches`, search(rayCharlesObject));
 
-console.log(`TEST - Testing an object without any properties.`);
-console.log(search(emptyObject));
+console.log(`Search Object Properties(no properties), return collection`, search(emptyObject));
 
-console.log(`TEST - Leave the search function empty.  Should return the whole collection.`);
-console.log(search());
+console.log(`Search No Object entered, return collection`, search());
 
-console.log(`TEST - Only entered an artist.  Should return two Albums`);
-console.log(search(singleProperty));
+console.log(`Search Object Properties(artist: Paper Lions), return 2 Paper Lions albums`, search(singleProperty));
 
-console.log(`TEST - Only entered a year.  Should return albums from BB and RHCP.`);
-console.log(search(propertyYear));
+console.log(`Search Object Properties(year: 2006), return 2 albums from 2006`, search(propertyYear));
 
-console.log(`TEST - Only entered a trackName ('My Wave') property.  Should return Soundgarden album`);
-console.log(search(propertyTrack));
+console.log(`Search Object Properties(trackName: My Wave), return Soundgarden album`, search(propertyTrack));
 
 // Should be able to showCollection on search arrays, too.
-console.log(`TEST - Run the showCollection function on the search function (using trackName search above)
-  Should log the album in the same manner as showCollection tests above.`);
+console.log(`Input search() into showCollection to log Soundgarden album`);
 showCollection(search(propertyTrack));
