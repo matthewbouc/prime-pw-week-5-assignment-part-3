@@ -62,12 +62,12 @@ console.log(findByArtist('Taylor Swift'));
 
 
 // create search function - define a default state of empty.  If empty, then return collection.
-function search(searchObject=""){
+function search(searchObject){
   // Arrays that will be used to store search results below.
   let results = collection;
   let tempResults = []
 // If nothing is entered into the search or the object is empty, return collection
-  if (searchObject === ""){
+  if (!searchObject){
     return collection;
   } // *end 'no criteria searched'
 
